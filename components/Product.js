@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Image from "next/image";
 import React, { useState } from "react";
 import Currency from "react-currency-formatter";
@@ -7,7 +8,23 @@ import { StarIcon } from "../components/icons/index";
 const MAX_RATING = 5;
 const MIN_RATING = 1;
 
+const Product = ({
+  id,
+  title,
+  price,
+  description,
+  category,
+  image,
+  rating,
+}) => {
+
+  const [customRating] = useState(
+    Math.floor(Math.random() * (MAX_RATING - MIN_RATING)) + MIN_RATING
+  );
   const [hasPrime] = useState(Math.random() < 0.5);
+
+  const addItemTOBasket = () => {
+    const loadingToast = toast.loading("Adding Item...");
 
     const product = {
       id,
@@ -20,12 +37,27 @@ const MIN_RATING = 1;
       customRating,
     };
 
-    
+    dispatch(addToBasket(product));
+
+    toast.success(`Item Added To Basket`, {
+      id: loadingToast,
+
+      position: "bottom-right",
+      style: {
+        textAlign: "center",
+        padding: "18px",
+      },
+    });
+  };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
       className="relative flex flex-col m-5 bg-white z-30 p-10 hover:shadow-lg"
     >
+        
       <p className="absolute top-2 right-2 text-xs italic text-gray-400">
         {category}
       </p>
@@ -61,12 +93,15 @@ const MIN_RATING = 1;
           <p className="text-xs text-gray-500">FREE Next-day Delivery</p>
         </div>
       )}
-      <button
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={addItemTOBasket}
         className="mt-auto button"
       >
         Add to Busket
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   );
 };
 
