@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import React, { useState } from "react";
 import Currency from "react-currency-formatter";
+import toast, { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
-import { StarIcon } from "../components/icons/index";
+import { StarIcon } from "../components/icons";
+import { addToBasket } from "../slices/basketSlice";
 
 const MAX_RATING = 5;
 const MIN_RATING = 1;
@@ -17,7 +20,7 @@ const Product = ({
   image,
   rating,
 }) => {
-
+  const dispatch = useDispatch();
   const [customRating] = useState(
     Math.floor(Math.random() * (MAX_RATING - MIN_RATING)) + MIN_RATING
   );
@@ -57,7 +60,7 @@ const Product = ({
       viewport={{ once: true }}
       className="relative flex flex-col m-5 bg-white z-30 p-10 hover:shadow-lg"
     >
-        
+      <Toaster />
       <p className="absolute top-2 right-2 text-xs italic text-gray-400">
         {category}
       </p>
