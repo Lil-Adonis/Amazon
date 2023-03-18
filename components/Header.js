@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectItems } from "../slices/basketSlice";
-import { Search, ShoppingCart, MenuIcon } from "../components/icons/index";
+import { Search, ShoppingCart, MenuIcon } from "../icons";
 
 const Header = () => {
   const { data: session } = useSession();
