@@ -1,7 +1,7 @@
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import { motion } from "framer-motion";
-
+import Footer from "../components/Footer"
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
@@ -27,6 +27,7 @@ export default function Home({ products }) {
       <main className="max-w-screen-2xl mx-auto">
         <Banner />
         <ProductFeed products={products} />
+        <Footer/>
       </main>
     </motion.div>
   );
